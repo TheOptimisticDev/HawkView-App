@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HawkView</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="burger-menu">&#9776;</div>
+        <h1>HawkView</h1>
+        <a id="toggle"><i class="fas fa-user" style="font-size: 40px;"></i></a>
+    </header>
+
+    <div id="map"></div>
+
+    <div id="nav-buttons">
+        <a id="toggle"><i class="fas fa-home" style="font-size: 40px;"></i></a>
+        <a id="toggle"><i class="fas fa-map-marker-alt" style="font-size: 40px;"></i> </a>
+        <a id="toggle"><i class="fas fa-bell" style="font-size: 40px;"></i></a>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+
+            // Initialize location sharing as disabled
+            let isLocationSharingEnabled = false;
+
+            // Add event listener to the toggle button
+            document.getElementById('toggleLocation').addEventListener('click', () => {
+                isLocationSharingEnabled = !isLocationSharingEnabled;
+                if (isLocationSharingEnabled) {
+                    startLocationSharing();
+                } else {
+                    stopLocationSharing();
+                }
+            });
+
+            function startLocationSharing() {
+                // Add code to start sharing location (e.g., enable click event listener)
+                map.on('click', async (e) => {
+                    const { lat, lng } = e.latlng;
+                    const weatherData = await fetchWeather(lat, lng);
+                    console.log(weatherData);
+                });
+            }
+
+            function stopLocationSharing() {
+                // Add code to stop sharing location (e.g., disable click event listener)
+                map.off('click');
+            }
+
+            async function fetchWeather(latitude, longitude) {
+                const response = await fetch('/location', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ latitude, longitude }),
+                });
+                return response.json();
+            }
+        });
+    </script>
+</body>
+</html>

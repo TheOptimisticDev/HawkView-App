@@ -1,0 +1,98 @@
+/* styles.css */
+
+/* Define variables */
+:root {
+    --primary-color: #48429c00;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: rgb(13, 12, 12);
+}
+
+/* Burger menu styles */
+.burger-menu {
+    cursor: pointer;
+    font-size: 45px;
+    padding-right: 15px;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #333;
+    margin: 20px 0;
+    padding: 0; 
+    font-weight: bold; 
+}
+
+/* Apply styles using a class */
+.heading-style {
+    font-size: 2rem;
+    color: #333;
+    margin: 20px 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+/* Map styles */
+#map {
+    height: 750px;
+    border-radius: 5px;
+}
+
+#nav-buttons {
+    display: flex;
+    border: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: rgb(32, 30, 30);
+}
+
+.nav-buttons:hover {
+    background-color: #555;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+
+    .burger-menu {
+        font-size: 20px;
+    }
+
+    #map {
+        height: 500px;
+    }
+
+    #nav-buttons {
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    header {
+        padding: 5px;
+    }
+
+    .burger-menu {
+        font-size: 18px;
+    }
+
+    #map {
+        height: 400px;
+    }
+
+    #nav-buttons {
+        padding: 5px;
+    }
+}
